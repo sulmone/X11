@@ -13,5 +13,8 @@ LOCAL_PATH := $(X11_GLOBAL_PATH)
 include $(LOCAL_PATH)/libpthread-stubs-0.3/Android.mk
 LOCAL_PATH := $(X11_GLOBAL_PATH)
 
+include $(LOCAL_PATH)/libxcb-1.8.1/Android.mk
+LOCAL_PATH := $(X11_GLOBAL_PATH)
+
 LOCAL_PATH := $(X11_GLOBAL_PATH)
 
