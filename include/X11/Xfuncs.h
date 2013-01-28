@@ -44,9 +44,7 @@ void bcopy();
 #    define bcmp(b1,b2,len) memcmp(b1, b2, len)
 #   else
 #    include <string.h>
-#    if defined(__SCO__) || defined(__sun) || defined(__UNIXWARE__)
-#     include <strings.h>
-#    endif
+#    include <strings.h>
 #    define _XFUNCS_H_INCLUDED_STRING_H
 #   endif
 #  endif /* X_USEBFUNCS */
