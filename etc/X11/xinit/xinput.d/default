@@ -1,0 +1,40 @@
+#
+# This configuration provides default IM setting (user edittable)
+# See im-switch(8) and /usr/share/doc/im-switch/README.Debian .
+
+#
+# Define IM for traditional X application with XIM
+#
+#  XIM server name used for XMODIFIERS="@im=$XIM"
+#  XIM program /path/filename
+#  XIM program command line arguments
+#
+#  These were traditional setting before uim and scim for CJK languages
+#  Language   LC_CTYPE     XIM server XMODIFIERS              Start key
+#  Japanese   ja_JP*       kinput2    "@im=kinput2"           Shift-Space
+#  Korean     ko_KR*       ami        "@im=Ami"               Shift-Space
+#  Chinese(T) zh_TW.Big5   xcin       "@im=xcin-zh_TW.big5"   Ctrl-Space
+#  Chinese(S) zh_CN.GB2312 xcin       "@im=xcin-zh_CN.GB2312" Ctrl-Space
+# 
+XIM=
+XIM_PROGRAM=
+XIM_ARGS=
+XIM_PROGRAM_XTRA=
+# Set following variable to non-zero string if program set itself as deamon
+XIM_PROGRAM_SETS_ITSELF_AS_DAEMON=
+#
+# Define GTK and QT IM module
+#   They may or may not be using xim as the IM.
+#
+GTK_IM_MODULE=
+QT_IM_MODULE=
+
+#
+# Define lists of packages neded for above IM to function
+#
+DEPENDS=
+
+#
+# Define X start up hook script to update IM environment
+#
+

@@ -1,0 +1,8 @@
+for i in /usr/lib/*/gtk-3.0/3.0.0/menuproxies/libappmenu.so
+do
+	if [ -f $i ]
+	then
+		export UBUNTU_MENUPROXY="libappmenu.so"
+		break
+	fi
+done

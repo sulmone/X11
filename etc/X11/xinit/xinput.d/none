@@ -1,0 +1,28 @@
+#
+# This configuration provides setting not to use any IM (keep as this is)
+# See im-switch(8) and /usr/share/doc/im-switch/README.Debian .
+# 
+XIM=
+XIM_PROGRAM=
+XIM_ARGS=
+XIM_PROGRAM_XTRA=
+
+#
+# Define GTK and QT IM module
+#   They may or may not be using xim as the IM.
+#
+GTK_IM_MODULE=
+QT_IM_MODULE=
+
+# Make sure to set as -z
+XMODIFIERS=
+
+#
+# Define lists of packages neded for above IM to function
+#
+DEPENDS=
+
+#
+# Define X start up hook script to update IM environment
+#
+

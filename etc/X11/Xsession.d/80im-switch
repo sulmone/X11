@@ -1,0 +1,79 @@
+#!/bin/sh
+# Copyright (C) 2005 Kenshi Muto <kmuto@debian.org> 
+#  Modified for Debian package.
+# Copyright (C) 1999 - 2004 Red Hat, Inc. All rights reserved. This
+# copyrighted material is made available to anyone wishing to use, modify,
+# copy, or redistribute it subject to the terms and conditions of the
+# GNU General Public License version 2.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# X Input method setup script
+
+# Keep original values related to IM
+_XIM=$XIM
+_XIM_PROGRAM=$XIM_PROGRAM
+_XIM_ARGS=$XIM_ARGS
+_XMODIFIERS=$XMODIFIERS
+_GTK_IM_MODULE=$GTK_IM_MODULE
+_QT_IM_MODULE=$QT_IM_MODULE
+
+# $LNG is locale <language>_<region> without .<encoding> and .<encoding>@EURO
+LNG=${LC_ALL:-${LC_CTYPE:-${LANG}}}
+LNG=${LNG%@*}
+LNG=${LNG%.*}
+
+[ -z "$LNG" ] && LNG="all_ALL" || true
+
+echo "Setting IM through im-switch for locale=$LNG."
+
+# Source first found configuration under $LNG locale
+for f in    "$HOME/.xinput.d/${LNG}" \
+	    "$HOME/.xinput.d/all_ALL" \
+	    "/etc/X11/xinit/xinput.d/${LNG}" \
+	    "/etc/X11/xinit/xinput.d/all_ALL" \
+	    "/etc/X11/xinit/xinput.d/default" ; do
+    if [ -f "$f" -a -r "$f" ]; then
+	echo "Start IM through $f linked to $(readlink -f $f)."
+	. "$f"
+	break
+    fi
+done
+
+unset LNG
+
+# Revibe IM related environment if other values were set.
+[ "$_XIM" ] && XIM=$_XIM || true
+[ "$_XIM_PROGRAM" ] && XIM_PROGRAM=$_XIM_PROGRAM || true
+[ "$_XIM_ARGS" ] && XIM_ARGS=$_XIM_ARGS || true
+[ "$_XMODIFIERS" ] && XMODIFIERS=$_XMODIFIERS ||true
+[ "$_GTK_IM_MODULE" ] && GTK_IM_MODULE=$_GTK_IM_MODULE || true
+[ "$_QT_IM_MODULE" ] && QT_IM_MODULE=$_QT_IM_MODULE || true
+
+
+[ -n "$GTK_IM_MODULE" ] && export GTK_IM_MODULE || true
+[ -n "$QT_IM_MODULE" ] && export QT_IM_MODULE || true
+
+# setup XMODIFIERS
+[ -z "$XMODIFIERS" -a -n "$XIM" ] && XMODIFIERS="@im=$XIM" || true
+[ -n "$XMODIFIERS" ] && export XMODIFIERS || true
+
+# execute XIM_PROGRAM
+if [ -n "$XIM_PROGRAM" -a -x "$XIM_PROGRAM" ]; then
+	 if [ -z "$XIM_PROGRAM_SETS_ITSELF_AS_DAEMON" ]; then
+		{
+			sleep 10
+			eval "$XIM_PROGRAM $XIM_ARGS &" || true
+		} &
+	else
+		{
+			sleep 10
+			eval "$XIM_PROGRAM $XIM_ARGS" || true
+		} &
+	fi
+fi
+# execute XIM_PROGRAM_XTRA
+[ -n "$XIM_PROGRAM_XTRA" ] && eval "$XIM_PROGRAM_XTRA &" || true
+

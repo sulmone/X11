@@ -1,0 +1,32 @@
+#
+# This configuration provides default IM setting for Thai with xim
+# See im-switch(8) and /usr/share/doc/im-switch/README.Debian .
+
+#
+# Define IM for traditional X application with XIM
+#
+#  XIM server name
+#  XIM program /path/filename
+#  XIM program command line arguments
+#  XMODIFIERS environment parameter
+# 
+XIM=BasicCheck
+XIM_PROGRAM=
+XIM_ARGS=
+
+#
+# Define GTK and QT IM module
+#   They may or may not be using xim as the IM.
+#
+GTK_IM_MODULE="xim"
+QT_IM_MODULE="xim"
+
+#
+# Define lists of packages neded for above IM to function
+#
+DEPENDS=
+
+#
+# Define X start up hook script to update IM environment
+#
+

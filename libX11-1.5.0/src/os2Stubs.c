@@ -31,7 +31,7 @@
 
 /* A few OS/2 functions needed in the X11 lib. Mainly, the file path redirection
  * functions and the "optimized" select() for the clients */
-
+#ifdef EXCLUDER
 #define I_NEED_OS2_H
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -423,6 +423,6 @@ APIRET rc;
 errno = 0;
 return(e);
 }
-
+#endif
 
 

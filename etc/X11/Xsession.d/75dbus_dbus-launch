@@ -1,0 +1,31 @@
+# $Id:$
+# In order to activate the session bus at X session launch
+# simply place use-session-dbus into your /etc/X11/Xsession.options file
+#
+
+STARTDBUS=
+DBUSLAUNCH=/usr/bin/dbus-launch
+
+if has_option use-session-dbus; then
+  if [ -x "$DBUSLAUNCH" ]; then
+    STARTDBUS=yes
+  fi
+fi
+
+if [ -n "$STARTDBUS" ]; then
+  # dbus-launch misbehaves when stdin is a console:
+  # - http://bugs.debian.org/453755
+  # - https://bugs.freedesktop.org/show_bug.cgi?id=39197
+  #
+  # While we sort out with upstream what the right solution is,
+  # work around it by ensuring that stdin is not a console (this is a no-op
+  # on xdm and gdm, but not on startx, slim, nodm).
+  #
+  # It isn't really D-Bus' place to do this - we're changing the environment
+  # of everything executed from Xsession.d, not just dbus-launch - but having
+  # X apps whose stdin is the console makes very little sense, so arguably
+  # startx, slim, nodm etc. should be doing this themselves.
+  exec < /dev/null
+
+  STARTUP="$DBUSLAUNCH --exit-with-session $STARTUP"
+fi

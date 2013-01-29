@@ -1,0 +1,17 @@
+# This file is sourced by Xsession(5), not executed.
+# Select the right session if we have already done
+# an unity check, try to check it other
+
+if [ "x$DESKTOP_SESSION" = "xubuntu" ] && [ ! -f "/tmp/unity_support_test.0" ]; then
+    if [ -f "/tmp/unity_support_test.1" ]; then
+        DESKTOP_SESSION="ubuntu-2d"
+        GDMSESSION="ubuntu-2d"
+    else
+        /usr/lib/nux/unity_support_test
+        if [ $? -ne 0 ]; then
+            DESKTOP_SESSION="ubuntu-2d"
+            GDMSESSION="ubuntu-2d"
+        fi
+    fi
+fi
+
