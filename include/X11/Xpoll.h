@@ -60,12 +60,12 @@ from The Open Group.
 
 #include <X11/Xmd.h>
 
-#ifdef CSRG_BASED
-#include <sys/param.h>
-# if BSD < 199103
-typedef long fd_mask;
-# endif
-#endif
+//#ifdef CSRG_BASED
+//#include <sys/param.h>
+//# if BSD < 199103
+typedef unsigned long fd_mask;
+//# endif
+//#endif
 
 #define XFD_SETSIZE	256
 
@@ -93,7 +93,7 @@ typedef struct fd_set {
 
 # define Select(n,r,w,e,t) select(n,(fd_set*)r,(fd_set*)w,(fd_set*)e,(struct timeval*)t)
 
-#define __X_FDS_BITS __fds_bits
+#define __X_FDS_BITS fds_bits
 
 #ifndef __FDS_BITS
 # define __FDS_BITS(p)  ((p)->__X_FDS_BITS)

@@ -5,7 +5,8 @@ LOCAL_PATH := $(X11_GLOBAL_PATH)
 GLOBAL_X11_INCLUDES :=					\
 $(LOCAL_PATH)/include 					\
 $(LOCAL_PATH)/include/X11				\
-$(LOCAL_PATH)/include/X11/extensions
+$(LOCAL_PATH)/include/X11/extensions	\
+$(LOCAL_PATH)/include/xorg				\
 
 #include $(LOCAL_PATH)/xproto-7.0.23/Android.mk
 #LOCAL_PATH := $(X11_GLOBAL_PATH)
@@ -23,6 +24,12 @@ LOCAL_PATH := $(X11_GLOBAL_PATH)
 #LOCAL_PATH := $(X11_GLOBAL_PATH)
 
 include $(LOCAL_PATH)/libX11-1.5.0/Android.mk
+LOCAL_PATH := $(X11_GLOBAL_PATH)
+
+include $(LOCAL_PATH)/libXfont-1.4.5/Android.mk
+LOCAL_PATH := $(X11_GLOBAL_PATH)
+
+include $(LOCAL_PATH)/xorg-server-1.12.2/Android.mk
 LOCAL_PATH := $(X11_GLOBAL_PATH)
 
 LOCAL_PATH := $(X11_GLOBAL_PATH)
