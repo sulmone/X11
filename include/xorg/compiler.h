@@ -984,7 +984,7 @@ inl(unsigned short port)
 /* note that the appropriate setup via "ioperm" needs to be done */
 /*  *before* any inx/outx is done. */
 
-#include <sys/io.h>
+#include <asm/io.h>
 
 static __inline__ void
 xf_outb(unsigned short port, unsigned char val)

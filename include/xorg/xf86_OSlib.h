@@ -194,7 +194,7 @@
 #include <sys/mman.h>
 #ifdef __linux__
 #define HAS_USL_VTS
-#include <sys/kd.h>
+#include <linux/kd.h>
 #include <sys/vt.h>
 #define LDGMAP GIO_SCRNMAP
 #define LDSMAP PIO_SCRNMAP

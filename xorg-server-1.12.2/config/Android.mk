@@ -1,0 +1,13 @@
+
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := libXServer-config
+LOCAL_C_INCLUDES := $(LIBXSERVER_INCLUDES)
+LOCAL_CFLAGS    := -DHAVE_DIX_CONFIG_H -DHAVE_XORG_CONFIG_H
+LOCAL_SRC_FILES := 	\
+config.c			\
+
+LOCAL_STATIC_LIBRARIES := libpixman
+
+include $(BUILD_STATIC_LIBRARY)
